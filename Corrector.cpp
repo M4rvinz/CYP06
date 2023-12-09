@@ -68,6 +68,24 @@ void	Diccionario(char* szNombre, char szPalabras[][TAMTOKEN], int iEstadisticas[
 					}
 				}
 			}
+			// burbujazo
+			int capas, comp, o, h;
+			//palabras repetidas
+			for (i = 0; i < iNumElementos - 1; i++) {
+				for (o = i + 1; o < iNumElementos;) {
+					if (strcmp(szPalabras[i], szPalabras[o]) == 0) {
+						iEstadisticas[i] = iEstadisticas[i] + 1;
+						// Eliminar elemento duplicado
+						for (h = o; h < iNumElementos - 1; h++) {
+							strcpy_s(szPalabras[h], TAMTOKEN, szPalabras[h + 1]);
+						}
+						(iNumElementos)--;
+					}
+					else {
+						o++;
+					}
+				}
+			}
 	}
 	fclose(fpDicc);
 }
