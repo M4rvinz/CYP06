@@ -86,6 +86,17 @@ void	Diccionario(char* szNombre, char szPalabras[][TAMTOKEN], int iEstadisticas[
 					}
 				}
 			}
+			for (capas = 0; capas < iNumElementos - 1; capas++) {
+				for (comp = 0; comp < iNumElementos - 1; comp++) {
+					if (strcmp(szPalabras[comp], szPalabras[comp + 1]) > 0) {
+
+						strcpy_s(apoyo, TAMTOKEN, szPalabras[comp]);
+						strcpy_s(szPalabras[comp], TAMTOKEN, szPalabras[comp + 1]);
+						strcpy_s(szPalabras[comp + 1], TAMTOKEN, apoyo);
+					}
+				}
+			}
+		}
 	}
 	fclose(fpDicc);
 }
