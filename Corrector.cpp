@@ -26,7 +26,24 @@ Quiso decir : Programa principal de la aplicacion de la distancia de Levenstein.
 ******************************************************************************************************************/
 void	Diccionario(char* szNombre, char szPalabras[][TAMTOKEN], int iEstadisticas[], int& iNumElementos)
 {
-	
+	FILE* fpDicc;
+	char linea[80000];
+	char palabraDetectada[TAMTOKEN];
+	int i;
+	int indicePD;
+	char apoyo[TAMTOKEN];
+	iNumElementos = 0;
+	// abrir el achivo
+	if (DEPURAR == 1)
+		printf("%s", szNombre);
+
+	fopen_s(&fpDicc, szNombre, "r");
+
+	if (fpDicc != NULL)
+	{
+
+	}
+	fclose(fpDicc);
 }
 
 
