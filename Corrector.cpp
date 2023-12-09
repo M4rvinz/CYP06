@@ -59,6 +59,15 @@ void	Diccionario(char* szNombre, char szPalabras[][TAMTOKEN], int iEstadisticas[
 						iNumElementos++;
 					}
 				}
+				else
+				{
+					if (linea[i] != '(' && linea[i] != ')' && linea[i] != ',' && linea[i] != '.' && linea[i] != ';' && linea[i] != ':' && linea[i] != ' ' && linea[i] != '\'' && linea[i] != '-' && linea[i + 1] != '-')
+					{
+						palabraDetectada[indicePD] = tolower(linea[i]);
+						indicePD++;
+					}
+				}
+			}
 	}
 	fclose(fpDicc);
 }
