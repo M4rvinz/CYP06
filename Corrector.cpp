@@ -97,8 +97,9 @@ void	Diccionario(char* szNombre, char szPalabras[][TAMTOKEN], int iEstadisticas[
 				}
 			}
 		}
+		fclose(fpDicc);
 	}
-	fclose(fpDicc);
+	printf("\nNumPalabras: %i\n", iNumElementos);
 }
 
 
