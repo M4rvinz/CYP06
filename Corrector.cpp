@@ -141,11 +141,69 @@ void	ListaCandidatas		(
 	int &	iNumSugeridas)						//Numero de elementos en la lista
 ******************************************************************************************************************/
 void	ClonaPalabras(
-	char *	szPalabraLeida,						// Palabra a clonar
-	char	szPalabrasSugeridas[][TAMTOKEN], 	//Lista de palabras clonadas
-	int &	iNumSugeridas)						//Numero de elementos en la lista
+	char* szPalabraLeida,						// Palabra a clonar
+	char szPalabrasSugeridas[][TAMTOKEN], 	//Lista de palabras clonadas
+	int& iNumSugeridas)						//Numero de elementos en la lista
 {
-	//Sustituya estas lineas por su c digo
-	strcpy(szPalabrasSugeridas[0], szPalabraLeida); //lo que sea que se capture, es sugerencia
-	iNumSugeridas = 1;							//Una sola palabra sugerida
+	int i;
+	char clona[50][TAMTOKEN];
+	char ayuda[50];
+	char palabra[50];
+	// Almacenar la palabra original en la posición 0 del arreglo de palabras sugeridas
+	strcpy_s(szPalabrasSugeridas[0], szPalabraLeida);
+
+	// Eliminar una letra a la vez y almacenar las sugerencias en el arreglo
+	int longitud = strlen(szPalabraLeida);
+
+	strcpy_s(palabra, TAMTOKEN, szPalabraLeida);
+
+	strcpy_s(szPalabrasSugeridas[0], TAMTOKEN, szPalabraLeida);
+
+	for (int i = 1; i < longitud + 1; i++) {
+		int indice = 0;
+
+		// Iteramos sobre cada posición en la palabra
+		for (int j = 0; j < longitud; j++) {
+			// Saltamos el carácter en la posición actual
+			if (i != j) {
+				clona[i + 1][indice++] = palabra[j];
+			}
+		}
+		clona[i][indice] = '\0';  // Agregamos el carácter nulo al final
+	}
+	//for (int l = 1; l < 100; l++)
+	//{
+		/*for (i = 0; i < longitud; i++)
+		{
+			ayuda[i]=szPalabraLeida[i + 1];
+		}
+
+
+		strcpy_s(clona[1][TAMTOKEN],TAMTOKEN, ayuda);
+	//}*/
+
+
+
+	// Transponer pares de caracteres y almacenar las nuevas sugerencias
+	for (int i = 0; i < longitud - 1; i++) {
+		// Copiar la palabra original
+		strcpy_s(szPalabraLeida, TAMTOKEN, szPalabrasSugeridas[0]);
+
+		// Intercambiar caracteres en posición i e i+1 sin usar void swap
+		szPalabraLeida[i] ^= szPalabraLeida[i + 1];
+		szPalabraLeida[i + 1] ^= szPalabraLeida[i];
+		szPalabraLeida[i] ^= szPalabraLeida[i + 1];
+
+		// Almacenar la palabra modificada en el arreglo de palabras sugeridas
+		strcpy_s(szPalabrasSugeridas[longitud + i + 1], TAMTOKEN, szPalabraLeida);
+	}
+
+
+	printf("Palabras Sugeridas:\n");
+	for (int i = 0; i <= longitud + longitud - 1; i++) {
+		printf("%s\n", szPalabrasSugeridas[i]);
+
+		strcpy_s(szPalabrasSugeridas[0], TAMTOKEN, szPalabraLeida); //lo que sea que se capture, es sugerencia
+		iNumSugeridas = 1;							//Una sola palabra sugerida
+	}
 }
