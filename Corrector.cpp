@@ -41,7 +41,24 @@ void	Diccionario(char* szNombre, char szPalabras[][TAMTOKEN], int iEstadisticas[
 
 	if (fpDicc != NULL)
 	{
+		indicePD = 0;
+		while (!feof(fpDicc))
+		{
+			fgets(linea, sizeof(linea), fpDicc);
 
+			for (i = 0; i < strlen(linea); i++)
+			{
+				if (linea[i] == ' ' || linea[i] == '.' || linea[i] == ':' || linea[i] == ',' || linea[i] == '-' || linea[i] == ';' || linea[i] == '\n')
+				{
+					if (linea[i + 1] != ' ')
+					{
+						palabraDetectada[indicePD] = '\0';
+						strcpy_s(szPalabras[iNumElementos], TAMTOKEN, palabraDetectada);
+						iEstadisticas[iNumElementos] = 1;
+						indicePD = 0;
+						iNumElementos++;
+					}
+				}
 	}
 	fclose(fpDicc);
 }
